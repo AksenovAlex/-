@@ -1,0 +1,33 @@
+{% load mptt_tags %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'menu/css/style.css' %}" type="text/css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" type="text/css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<nav class='animated bounceInDown bg-dark'>
+    <ul class="navbar-nav mr-auto dropdown-menu-dark">
+          {% recursetree cats %}
+          {% if not node.is_leaf_node %}
+          <li class='sub-menu'>
+              <a href='#settings'>{{ node.name }}<div class='fa fa-caret-down right'></div>
+              </a>
+                <ul>
+                    {{ children }}
+                </ul>
+          </li>
+          {% else %}
+          <li class='sub-menu'>
+              <a href='{{ node.slug }}'>{{ node.name }}<div class='fa fa-caret-down right'></div>
+              </a>
+          </li>
+              {% endif %}
+    {% endrecursetree %}
+</ul>
+</nav>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+    $('.sub-menu ul').hide();
+    $(".sub-menu a").click(function () {
+	$(this).parent(".sub-menu").children("ul").slideToggle("100");
+	$(this).find(".right").toggleClass("fa-caret-up fa-caret-down");
+});
+ </script>

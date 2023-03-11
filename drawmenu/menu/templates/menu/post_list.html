@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Спорт</title>
+</head>
+<body>
+
+<h1>{{ name }}</h1>
+{% for post in object_list %}
+<div>
+    <h2>{{ post.name }}</h2>
+    <h3>{{ post.content }}</h3>
+</div>
+{% endfor %}
+
+</body>
+</html>
